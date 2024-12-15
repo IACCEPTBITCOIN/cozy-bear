@@ -1,0 +1,7 @@
+Issues
+
+1. driver.cpp   -   class accessor functions were not tested.
+                    this can be done by printing the output of those functions.
+2. Class file names should be proper case such as Rectangle.h and Rectangle.cpp.
+
+Please review posted solution on Brightspace.

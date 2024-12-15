@@ -1,0 +1,11 @@
+﻿ID,TYPE,COMMIT #,STATUS,DESCRIPTION,REPORTER,ASSIGNEE,DUE,CREATED,RESOLVED,NOTES
+1,task,302c6f3,Closed,"driver.cpp, file.h/cpp, container.h.cpp - skeleton",9-Oct,Shafin,8-Oct,4-Oct,5-Oct,
+2,task,,Closed,"Container.h/cpp-Core Member Functions",,Shafin,9-Oct,8-Oct,,
+3,task,COMMIT #,Closed,"Container.cpp Core Member Function Writing & Files.h/.cpp read function complete & driver_phase1.cpp -- MUST INCLUDE ASSERTIONS NEXT!!! -- ,Michael, Michael,DUE OCT 9,RESOLVED OCT 12,,
+4,task,,Closed,"at resize and pop_back function Extended Member functions & driver_phase1.cpp",16-Oct,Shafin,Started 14-Oct,Finished Oct 15,,,
+5,task,7312498,Closed,at and pop_back and resize functions complete,,Shafin,16-Oct,14-Oct,15-Oct,
+6,task,,Closed,Phase 2 complete - extended member sortedInsert & erase functions complete. Continue adding assertions through phase 3 and at() function rework,Michael,Michael,started Oct 16th,finished Oct 20,,
+7,task,,Closed,Start of Phase 3 with preprocessing directives-Algorithms.cpp/.h created with makefile updated isPartof function started(not finished),Michael,Michael,Started Oct 21,Finished Oct 25,,
+8,task,,Closed,Phase 3 Algorithms.cpp/.h CommonValues function,16-Oct,Shafin,24-Oct,18-Oct,25-Oct,
+9,task,,CLosed,Phase 3 isPartof coded and implemented into Algorithm.h/cpp,Oct 25,Michael,Oct 24th,Oct 25th,,,
+10,task,,CLosed,Phase 3 Complete,Michael,Oct 25th,,finished Oct 25th,,

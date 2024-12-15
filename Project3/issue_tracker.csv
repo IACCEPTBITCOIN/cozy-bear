@@ -1,0 +1,3 @@
+ID,TYPE,COMMIT #,STATUS,DESCRIPTION,REPORTER,ASSIGNED,DUE,CREATED,RESOLVED,NOTES
+1, task, fed9e94d, Closed, "Project 3, Phase 1 Skeleton started", Michael, Nov 20th, DUE DEC 16th, NOV 26th, Closed, NEED TO FINISH MAKEFILE AND ADD CODE FOR PHASE 1 DATA MEMBERS & CORE MEMEBER FUNCTIONS OF CUSTOMER AND PACKAGE
+2, task,********, Open, "Project 3, Phase 1 Data Members & Core Members for Package & Customer", Michael, Nov 20th, DUE DEC 12th, DEC 9th, Open, MAKEFILE FINISHED - PHASE 1 DATA MEMBERS & CORE MEMEBER FUNCTIONS OF CUSTOMER & PACKAGE ADDED - Need to finish Files.h and add driver instantiations 

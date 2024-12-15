@@ -1,0 +1,8 @@
+ID,TYPE,COMMIT #,STATUS,DESCRIPTION,REPORTER,ASSIGNEE,DUE,CREATED,RESOLVED,NOTES
+1,task,e04510,Closed,"driver.cpp, Node,Iterator,Store,List.h/cpp, - skeleton",Oct 30th,Michael,Nov 21,Oct 30,Oct 30,
+2,task,097d985,Closed,Phase 1 Complete,,Michael,Nov 21,Oct 30, Nov 20,
+3,task,,Closed,Phase 2 Complete,,Michael,Nov 21,Oct 30, Nov 21 @ 5:40AM,
+4,task,,Closed,Phase 2 Complete - Updated with Operator Overloads defined in Store.cpp; Node constructors defined in .cpp instead .h; Find() finished,,Michael, Nov 21, Oct 30, Nov 22 @ 12:21 AM,
+5, task,,closed,phase 3 attempted added driver3,,Esmeralda,Nov22,Nov22, Not resolved,
+6, task,,closed,phase 3 attempted updated Makefile,,Esmeralda,Nov22,Nov22, Not resolved,
+4,task,,Closed,Phase 2 Complete - Updated with EDGE CASES of Phase 1 & 2 functions - EDITED READ FUNCTION TO ACCEPT STRING LITERAL AND LIST IT STORES IN- Couldn't finish Iterator Edge Cases,,Michael, Nov 21, Oct 30, Nov 22 @ 1:26 PM,

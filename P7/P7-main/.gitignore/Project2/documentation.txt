@@ -1,0 +1,259 @@
+-- Phase 1 complete.  097d985 tag MICHAEL
+---------------------
+I had many issues converting the Node, Iterator, List and driver into public and private member functions.
+I had to analyze each function and deduce whether it passed or manipulated data through the course of implementing the data structure
+Functions passing/reading data were constant pass by reference unless it was manupilating data. 
+The driver.cpp needed many changes. Function calls needed to be properly defined as such EX:
+Provided code was:
+
+List list;  //initialization
+push_back(200); 
+push_front(100);
+
+To fix and apply to our methods of OOP programming would be: 
+List list;    
+list.puch_back(200); 
+list.push_front(100);
+
+Upon constructing and fixing all the necessary functions within the driver file, it was able to run with no errors
+
+Understanding the method of incorperating member functions was difficult because it took understanding all functions and their respective behaviors. 
+
+This method of defining the function needed to be applied throughout the driver, Iterator, Node, & List
+
+Friend classes had to be given to List and Iterator in the public sector of Node.h and List friend class in Iterator.h since public and private encapsulation 
+created issues with accessing and reading the data.
+
+The makefile was introduced in the skeleton initial commit. It was easy to make due to transfering over from project 1 
+and changing a bit of information.
+
+---- Phase 2 Complete.
+-------------------------
+
+We are going to start with the implememntation of data.csv & driver phase 2.
+and update the Makefile to run the new driver file. 
+
+Now we will implement the Complex Data Types within the Store.h/.cpp that was made at in the skeleton
+Its data members are Names of Companies and # of Employees. 
+So our initialization of these members will be std::string N; & int E;  
+Default constructors must be initialized. within the memebr functions  
+
+NON MEMBER COMPARATOR WILL COME FROM 9_using_compare_for_sorting.cpp
+
+EX FROM CODE
+-------------------------------------------------------------------
+bool compare(const Thing &t1, const Thing &t2, bool comparator) 
+{
+    if(comparator == true) {
+        return t1.num <= t2.num;
+    } else  {
+        return t1.num > t2.num;
+    }
+}
+
+NOW TO OUR CODE
+----------------------------
+bool compare(const Store &o1,const Store &o2,bool comparator) const
+
+Compare three parameters: Store o1, Store o2, bool comparator
+    return true if comparator is true and
+        o1.employees <= o2.employees
+    return false if comparator is false and
+        o1.employees > o2.employees
+
+bool compare(const Store &o1, const Store &o2, bool comparator) 
+{
+    if(comparator == true) {
+        return o1.employees() <= o2.employees();
+    } else  {
+        return o1.employees() > o2.employees();
+    }
+}
+
+MEMBER EVQUIVALENT FUNCTION (Moved into Member to access through the containers easily)
+---------------------------------------------------
+Equivalent two parameters: Store o1, Store o2
+    return true if data members are equivalent
+    return false if data members are not equivalent
+
+HEADER CODE PULLED OUT
+
+friend bool equivalent(const Store &o1 == const Store &o2);        
+    
+    bool operator=(const Store &o1, const Store &o2 ) const {
+        return (o1.name == o2.name && o1.employees == o2.employees);
+}
+
+This code above did not work, I had to remove the parenthesesis along with the stuff I was experimenting on and 
+start to watch the lecture youtube videos on Operator Overloading
+
+after watching the video for a bit i came up with this:
+
+ bool operator==(const Store &o1) const {                 
+        return name == o1.name && employees == o1.employees;
+}
+
+I was able to then call the equivalence function by doing: 
+
+std::cout << (p1 == p2) << std::endl;
+
+
+Conversion of containet to store string and integer data types into CSV.
+------------------------------------------------------------------------------------------
+Upon reading the steps 5,6, & 7, it seems that it could be elements of Project 1 
+put into this container set to store data to data.csv. 
+We can do that using the read function and etc witht he elements of-
+interger to string & string to integer etc.  
+
+
+THe parameters for part 5 of Phase 2 say: 
+
+Convert the container class files to store values of the new complex data type
+(instead of int). All container class functions must work with this new data type.
+
+I must include Store.h into the Node.h first and include it as a container of Node to store integers 
+I can use a paramaterized constructor to point to the data of Store
+
+I can update this 
+Node(const int &d): data(d), next(nullptr), prev(nullptr) {};   
+To this:
+Node(const Store &d): data(d), next(nullptr), prev(nullptr) {};   
+and Ill add it as a friend just to make sure in Node
+
+Next we update List.h/cpp to store complex data types
+
+Since we updated the int &d pointer to Store &d to store the complex data types, 
+we must update the int& front(); int& back(); function calls to Store& front(); back(); 
+& anywhere where int &d or int& is 
+
+Step 5 is now complete.
+
+Step 6 I believe we add 5 lines to our data.csv file from smallest to largest and I will add
+
+StateFarm, 60
+MorsMutual, 80
+AllState, 100
+Farmers, 120
+NYAIP, 140
+
+Step 6 complete
+
+Step 7 now calls for implementing a read function into the driver2.cpp 
+
+I will start with what I have from project 1 and read from class notes to modify
+
+void FileRead::read(intArray& array)
+{
+    std::ifstream file("data.csv");
+
+    if (!file.is_open()) {
+        std:: cerr << "Error: data.csv does not exist" << std::endl;    // finished with the help of 1_exceptions.cpp and 
+        return;                                                         // https://cplusplus.com/doc/tutorial/files/
+    }
+
+    std::string line;                           // declare line so it can be called in the while loop.
+
+    while(std::getline(file, line) ) {   // read line of text from file into the variable line.             
+        std::string token;                                             
+        std::stringstream parser(line); 
+
+    while( std::getline(parser, token, ',') ) {   // extract token separated by commas from line.
+        int num = stoi(token);                         // convert token into integer.
+        array.push_back(num);                         // store integer into array declared above.
+    }
+
+    file.close();                           // must always close so it the file doesn't lock or corrupt 
+}
+----------------------------------------------------------
+CONVERTED FOR List
+
+void FileRead::read(List& lists){
+std::ifstream file("data.csv");
+
+if (!file.is_open()) {
+    std:: cerr << "Error: data.csv does not exist" << std::endl;    // finished with the help of 1_exceptions.cpp and 
+    return;                                                         // https://cplusplus.com/doc/tutorial/files/
+}
+
+std::string line;                           // declare line so it can be called in the while loop.
+
+while(std::getline(file, line) ) {   // read line of text from file into the variable line.             
+    std::stringstream ss(line);                                             
+    std::string name;
+    int employees; 
+
+    std::getline(ss, name, ",");
+    
+    ss >> employees; 
+
+    lists.push_back(Store(name, employees));
+}
+
+    file.close();                           // must always close so it the file doesn't lock or corrupt 
+    }
+}
+
+
+Im getting a compiler issue with changing the type for Stores data to printed out to the console
+
+I am thinking and reading up that 
+the Store function has to be overloaded to store objects directly using std::cout
+
+Going off of "Operator Overloading - Lecture 2" @ 51:49 may be able to solve this
+
+std::ostream& operator<<(std::ostream &os, const Store &d) {
+    os << "Company Name: " << store.name 
+       << ", Employees: " << store.employees;
+    return os;
+}
+
+WIth this overloaded,
+I am now having access with the push back and push front functions-
+looking for Store objects instead of Int objects so the driver does not work
+
+I must update the driver to work with said functions 
+
+It seems my construtor within store.cpp was incorrect and i had to fix it with such:
+Store::Store(const std::string &name, int employees) : name(name), employees(employees) {}
+
+and then default constructor for node as such:
+
+Node(): data(), next(nullptr), prev(nullptr) {} ;    
+
+ERROR FOR getline function cause of of "," instead of ','
+
+MY NEXT ERROR WAS 
+
+List.cpp:192:27: error: no match for ‘operator==’ (operand types are ‘Store’ and ‘int’)
+  192 |         if( itr.getData() == d ) {              // if node n stores the equivalent of d,
+      |             ~~~~~~~~~~~~~ ^~ ~
+      |                        |     |
+      |                        Store int
+This error was because Store a string data type with an integer data type 
+
+for now ill change int d to Store &d in the List.cpp and header
+
+
+The program now runs with everything implemented as best as possible 
+I believe I did the program wrong 
+I tried to the best of my ability to follow the instructions but i need to understand the linking of the List to Store & etc
+
+I have to include template classes to this code to make the data from store, go to lists and then write to the data.csv
+
+
+FIX NODE DECLARATIONS IN .CPP 
+FIX << and == OVERLOAD 
+FIXED FIND FUNCTIONS AND DECLARATIONS IN DRIVER SUCH AS AND ERROR FOR CONST CHAR 
+THIS WAS DUE TO STORE NOT READING STRING LITERALS 
+I NEEDED STORE TO THEN READ THE LIST OF STRING AND INTEGERS
+
+
+
+
+
+
+
+
+
+
+

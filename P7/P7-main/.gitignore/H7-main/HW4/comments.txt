@@ -1,0 +1,6 @@
+Issues:
+
+1. Constructors should use direct initialization syntax as demonstrated in the solution. Please review.
+2. GetValue should be tested to acces values in start, end and middle of the array.
+
+Please review the posted solution.

@@ -20,11 +20,11 @@ inline void readCustomers(std::list<Customer*>& customers) {
     std::getline(file, line);             // Skip the header line. (Michael Byrd-inspired CSV structure handling)
     while (std::getline(file, line)) {    // Read each line from the file.
         std::istringstream stream(line);
-        std::string idStr, name;
+        std::string name, idStr;
 
         // Adjusted parsing logic for CSV format with proper handling of fields.
-        if (std::getline(stream, idStr, ',') &&
-            std::getline(stream, name, ',')) {
+        if (std::getline(stream, name, ',') &&
+            std::getline(stream, idStr, ',')) {        // conversion error bug when compiling cause .csv has name, id format while code had id, name format. I switched code format to match .csv
 
             try {
                 
@@ -39,7 +39,7 @@ inline void readCustomers(std::list<Customer*>& customers) {
             std::cerr << "Error: Failed to parse line -> " << line << "\n";
         }
     }
-    file.close();                         // Close the file after reading.
+    file.close();                         
 }
 
 
@@ -53,10 +53,10 @@ inline void readPackages(std::list<Package*>& packages) {
     std::getline(file, line);             
     while (std::getline(file, line)) {   
         std::istringstream stream(line);
-        std::string idStr, name, maxPackagesStr;
+        std::string name, idStr, maxPackagesStr;                // THREW "Error : Failed to parse line -> " Due to idStr, name, maxPackages format in code but .csv was in  name, idStr, maxPackages
 
-        if (std::getline(stream, idStr, ',') && 
-            std::getline(stream, name) &&
+        if (std::getline(stream, name, ',') && 
+            std::getline(stream, idStr, ',' ) &&            // WAS ALSO MISSING ',' in std::getline(stream, idStr, ',')
             std::getline(stream, maxPackagesStr)) {
 
             try {

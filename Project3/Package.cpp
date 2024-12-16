@@ -12,7 +12,8 @@ Package::~Package()
     for(it = customers.begin(); it != customers.end(); ) {    
         delete *it;                                // Destructor to avoid memory leak  GOING OFF LOOP BELOW AS SAID IN 1:05:15 of "Templates - Lecture 1"  //MICHAEL    
         it = customers.erase(it);                   // CAN ALSO BE USED FOR INSERT // MUST MAKE SURE ITERATOR POINTS TO LEGITIMATE NODE                                                                                                             
-    }               
+    }
+    customers.clear();                
 }
 
 /*
@@ -68,29 +69,42 @@ void Package::setMaxPackages(int maxPackages)
 std::ostream &operator<<(std::ostream &os, const Package& pkg)
 {
     os << "Package Name: " << pkg.name                        // Needed to access string outputs to the console.  // MICHAEL
-    << ", Package ID: " << pkg.id <<"\n";                             
+    << ", Package ID: " << pkg.id 
+    << ", Max Packages: "<< pkg.maxPackages << "\n";                             
     return os;
 }
-
-bool operator==(const Package& p1, const Package& p2)
-{
-    if( p1.name != p2.name || p1.id != p2.id ){          // if packages p1 does not equal p2
-        return false;                                     // SINCE LIST DOES NOT SUPPORT RANDOM ACCESS UNLIKE VECTOR, WE MUST USE ITERATORS TO COMPARE ELEMENTS IN SEQUENTIALLY IN THE LIST
+std::ostream& operator<<(std::ostream &os, const std::list<Package*> &pkg)
+{   
+    for (auto it = pkg.begin(); it != pkg.end(); ++it){
+        if (*it){
+            os << **it;                         // NEEDED TWO << OVERLOADS TO DEREFERENCE THE OBJECTS SO THEY CAN BE DIRECTLY ACCESSED
+        }
     }
-    if(p1.customers.size() != p2.customers.size()){
-        return false; 
-    } 
-    auto it1 = p1.customers.begin(); 
-    auto it2 = p2.customers.begin();
+    return os; 
+}
 
-    while(it1 != p1.customers.end() && it2 != p2.customers.end()){  
+bool operator==(const std::list<Package*>& p1, const std::list<Package*>& p2)
+{
+    if( p1.size() != p2.size()){ 
+        return false;                                     // SINCE LIST DOES NOT SUPPORT RANDOM ACCESS UNLIKE VECTOR, WE MUST USE ITERATORS TO COMPARE ELEMENTS SEQUENTIALLY IN THE LIST
+    }
+
+    auto it1 = p1.begin(); 
+    auto it2 = p2.begin();
+
+    while(it1 != p1.end() && it2 != p2.end()){  
         if(!(**it1 == **it2)){
             return false; 
         }
         ++it1;
         ++it2;
     }
-    return true;                                                                   
+    return true;              
+}
+
+bool operator==(const Package& p1, const Package& p2)
+{
+    return p1.name == p2.name && p1.id == p2.id;                                                                            
 }
 
  

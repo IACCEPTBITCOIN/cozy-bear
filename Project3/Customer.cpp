@@ -1,10 +1,6 @@
 #include "Customer.h"
 #include "Package.h"
 
-/*
-CORE MEMBERS HAVE BEEN ADDED FOR CUSTOMER BY MICHAEL BYRD
-*/
-
 //Customer::Customer() : name(""), id(0), packages(0){}   
 
 Customer::~Customer()
@@ -12,7 +8,8 @@ Customer::~Customer()
     for(it = packages.begin(); it != packages.end(); ) {    
         delete *it;                                // Destructor to avoid memory leak  GOING OFF LOOP BELOW AS SAID IN 1:05:15 of "Templates - Lecture 1"  //MICHAEL    
         it = packages.erase(it);                   // CAN ALSO BE USED FOR INSERT // MAKE SURE ITERATOR POINTS TO LEGITIMATE NODE                                                                                                             
-    }               
+    }
+    packages.clear();                // didnt add but after searching 6_templates_list_traversal.cpp, i noticed it was missing
 }
 
 /*
@@ -37,59 +34,66 @@ Customer::Customer(const std::string &name, int id) : name(name), id(id), packag
 
 int Customer::getID() const                             
 {
-    return id;                              // Accessor function //MICHAEL
+    return id;                              // Accessor function 
 }
 
 std::string Customer::getName() const 
 {
-    return name;                                    // Accessor function // MICHAEL
+    return name;                                    // Accessor function 
 }
 
 void Customer::setID(int newID)
 {
-    this -> id = newID;                            // Mutator function // MICHAEL
+    this -> id = newID;                            // Mutator function 
 }
 
 void Customer::setName(const std::string& newName)
 {
-    this -> name = newName;                           //  Mutator function // MICHAEL
+    this -> name = newName;                           //  Mutator function 
 }
 
 std::ostream &operator<<(std::ostream &os, const Customer&customer)
 {
-    os << "Customer Name: " << customer.name                        // Needed to access string outputs to the console.  // MICHAEL
+    os << "Customer Name: " << customer.name                        // Needed to access string outputs to the console.  
     << ", Customer ID: " << customer.id <<"\n";                            
     return os;
 }
+std::ostream& operator<<(std::ostream &os, const std::list<Customer*> &customer)
+{   
+    for (auto it = customer.begin(); it != customer.end(); ++it){
+        if (*it){
+            os << **it;
+        }
+    }
+    return os; 
+}
 
-bool operator==(const Customer& o1,const Customer& o2) 
+bool operator==(const std::list<Customer*>& o1,const std::list<Customer*> & o2)
 {
-    if( o1.name != o2.name || o1.id != o2.id ){  
+    if( o1.size() != o2.size()){ 
         return false;                                     // SINCE LIST DOES NOT SUPPORT RANDOM ACCESS UNLIKE VECTOR, WE MUST USE ITERATORS TO COMPARE ELEMENTS IN SEQUENTIALLY IN THE LIST
     }
-    if(o1.packages.size() != o2.packages.size()){
-        return false; 
-    } 
-    auto it1 = o1.packages.begin(); 
-    auto it2 = o2.packages.begin();
 
-    while(it1 != o1.packages.end() && it2 != o2.packages.end()){  
+    auto it1 = o1.begin(); 
+    auto it2 = o2.begin();
+
+    while(it1 != o1.end() && it2 != o2.end()){  
         if(!(**it1 == **it2)){
             return false; 
         }
         ++it1;
         ++it2;
     }
-    return true;                                                                   
-}   
+    return true;                 
+}
 
 
-/*
-bool operator==(const Store &o1, const Store&o2 ) {                  // equivalence function
-    return o1.name == o2.name && o1.employees == o2.employees; // essentially, if o1.name == o2.name & o1. # employees = o2. # employees
-}                                                           // return bool true(1) if conditions are met, if not false(0)   //MICAHEL 
-                                                            // From "Operator Overloading - Lecture 2" 29:48
-*/
+bool operator==(const Customer& o1,const Customer& o2) 
+{
+    return o1.name == o2.name && o1.id == o2.id;                                                                   
+} 
+
+
 
 /*    CONTAINER MEMBER OF CUSTOMER TO DISPLAY PACKAGES OF CUSTOMER, THE SYNTAX IS INCORRECT 
 

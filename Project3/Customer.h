@@ -47,10 +47,8 @@ public:
     friend bool operator==(const Customer& o1,const Customer& o2);                 // Overload customer to determine if two objects are equivalent 
     friend bool operator==(const std::list<Customer*>& o1,const std::list<Customer*> & o2); 
 
-
-    
-// Container member functions 
-    //void display(std::vector<Package*> &vec) const;               // WILL WORK OFF TEMPLATE PRINTING AS DESCRIBED IN TEMPLATE LECTURE 
+// Container Member Functions Phase 2 
+    void display(std::list<Package*> &other) const;               // WILL WORK OFF TEMPLATE PRINTING AS DESCRIBED IN TEMPLATE LECTURE 
 
 };
 

@@ -85,7 +85,7 @@ void print(const std::list<T*>& container) {
         if (*it) {                                                              // Check if pointer is valid before dereferencing.
             std::cout << std::setw(columnWidth) << std::left << **it << "\n";  // Print each object's data in a formatted row.
         } else {
-            std::cerr << "Debug to continue\n"; 
+            std::cerr << "Debug to continue\n";                     // CLOSLY DERIVED FROM 4_TEMPLATE_CONTAINERS.CPP
         }
     }
 }

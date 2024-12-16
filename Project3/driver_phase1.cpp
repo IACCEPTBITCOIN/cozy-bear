@@ -149,8 +149,32 @@ int main() {
 
     std::cout << "Customer.csv" << std::endl; 
     std::cout << "------------" << std::endl; 
-    print(list1);  
+    print(list1); 
 
+    std::cout << "PHASE 2 FUNCTIONS " << std::endl; 
+    std::cout << "-----------------" << std::endl;  
+
+
+    for (Customer* customer : list1) 
+    {
+        customer->display(box1); 
+    }
+
+    for (Package* package : box1) 
+    {
+        package->display(list1); 
+    }
+
+    box1.clear();
+
+    box1.push_back(new Package("McDouble", 3, 2));  
+
+    for (Customer* customer : list1) 
+    {
+        customer->display(box1); 
+    }
+    
+    
     std::cout << "\U0001F44D" << std::endl;
     
     box1.clear(); 

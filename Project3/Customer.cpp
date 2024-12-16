@@ -1,7 +1,7 @@
 #include "Customer.h"
 #include "Package.h"
+#include <sstream>
 
-//Customer::Customer() : name(""), id(0), packages(0){}   
 
 Customer::~Customer()
 {
@@ -95,15 +95,25 @@ bool operator==(const Customer& o1,const Customer& o2)
 
 
 
-/*    CONTAINER MEMBER OF CUSTOMER TO DISPLAY PACKAGES OF CUSTOMER, THE SYNTAX IS INCORRECT 
+//CONTAINER MEMBER OF CUSTOMER TO DISPLAY PACKAGES OF CUSTOMER, THE SYNTAX IS INCORRECT 
 
-void Customer::display(std::vector<Package*> &vec) const{
-    
-    typename std::vector<Package*>::iterator it = vec.begin();     // typename keyword required to specify an iterator for a vector of type Package       
-    while( it != vec.end() ) {                              // advance the iterator until the end of the vector
-        std::cout << *it << " ";                            // overloaded * returns the current object accessed by the iterator
+void Customer::display(std::list<Package*>& other) const{
+    /*
+    std::list<Package*>::iterator it = other.begin();     // typename keyword required to specify an iterator for a vector of type Package       
+    while( it != other.end() ) {                              // advance the iterator until the end of the list
+        std::cout << **it;                            // overloaded * returns the current object accessed by the iterator
         ++it;                                               // overloaded ++ to advance the iterator forward
     }                                                       // Modified from 4_template_containers.cpp   WORKS OFF OVERLOAD << OF PACKAGE.H
     std::cout << "\n";
+    */
+   
+   for (auto it = other.begin(); it != other.end(); ++it){
+        std::cout << **it; 
+   }
+   std::cout << "\n";
+   
 }
-*/
+
+// THIS DISPLAY FUNCTION ITERATES THE CALLED PACKAGE CONTAINER 5 TIMES DUE TO THERE BEING 5 PACKAGES 
+
+

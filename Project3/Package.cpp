@@ -104,7 +104,24 @@ bool operator==(const std::list<Package*>& p1, const std::list<Package*>& p2)
 
 bool operator==(const Package& p1, const Package& p2)
 {
-    return p1.name == p2.name && p1.id == p2.id;                                                                            
+    return p1.name == p2.name && p1.id == p2.id && p1.maxPackages == p2.maxPackages;                                                                            
+}
+
+void Package::display(std::list<Customer*>& o2) const{
+    /*
+    std::list<Customer*>::iterator it = o2.begin();     // typename keyword required to specify an iterator for a vector of type Package       
+    while( it != o2.end() ) {                              // advance the iterator until the end of the vector
+        std::cout << **it;                            // overloaded * returns the current object accessed by the iterator
+        ++it;                                               // overloaded ++ to advance the iterator forward
+    }                                                       // Modified from 4_template_containers.cpp   WORKS OFF OVERLOAD << OF PACKAGE.H
+    std::cout << "\n";
+    */
+   
+   for (auto it = o2.begin(); it != o2.end(); ++it){
+        std::cout << **it; 
+   }
+   
+   std::cout << "\n";
 }
 
  

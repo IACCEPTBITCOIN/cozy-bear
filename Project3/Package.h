@@ -33,6 +33,10 @@ public:
     friend std::ostream& operator<<(std::ostream &os, const std::list<Package*> &pkg);   
     friend bool operator==(const Package& p1, const Package& p2);
     friend bool operator==(const std::list<Package*>& p1, const std::list<Package*>& p2);
+
+    // PHASE 2 CONTAINER FUNCTIONS 
+
+    void display(std::list<Customer*>& o2) const;
 };
 
 #endif
